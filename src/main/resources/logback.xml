@@ -26,11 +26,28 @@
         </triggeringPolicy>
     </appender>
 
+    <appender name="NOTIFICATIONS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <file>${logs_path}/notifications.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logs_path}/archived/notifications.%i.log</fileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
     <!-- Appender Output Configuration -->
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_MAIN"/>
     </root>
+
+    <logger name="kz.itolstov.demo.service.NotificationService" level="info">
+        <appender-ref ref="NOTIFICATIONS" />
+    </logger>
 
 
 </configuration>
