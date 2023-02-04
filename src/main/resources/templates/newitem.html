@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Новый лот</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Добавить новый лот</h1>
+<form action="#" th:action="'@{/new-item?owner_id=' + ${}}" th:object="${item}" method="post">
+    <p>Название: <input type="text" th:field="*{name}" /></p>
+    <p>Описание: <input type="text" th:field="*{description}" /></p>
+    <p>Стартовая цена: <input type="text" th:field="*{minimalPrice}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
