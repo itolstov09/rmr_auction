@@ -1,0 +1,10 @@
+[
+  {
+    "exampleKey": "POST-201-ex1",
+    "description": "valid user request body",
+    "requestBody": {
+      "email": "mail@mail.com",
+      "password": "123"
+    }
+  }
+]
