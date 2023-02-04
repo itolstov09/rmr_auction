@@ -52,6 +52,19 @@
         </triggeringPolicy>
     </appender>
 
+    <appender name="DBRUNNER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <file>${logs_path}/dbrunner.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logs_path}/archived/dbrunner.%i.log</fileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
     <!-- Appender Output Configuration -->
     <root level="info">
         <appender-ref ref="CONSOLE"/>
@@ -64,6 +77,10 @@
 
     <logger name="kz.itolstov.demo.service.AuctionService" level="debug">
         <appender-ref ref="AUCTION" />
+    </logger>
+
+    <logger name="kz.itolstov.demo.DBRunner" level="info">
+        <appender-ref ref="DBRUNNER" />
     </logger>
 
 

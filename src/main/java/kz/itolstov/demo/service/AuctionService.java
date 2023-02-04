@@ -188,7 +188,7 @@ public class AuctionService {
             itemService.save(item);
 
             // удаляем ставки из пула
-            // todo возможно стоит отправлять или вызывать ошибку для тех ставок, которые оказались в пуле..
+            // todo возможно стоит отправлять уведомление или вызывать ошибку для тех ставок, которые оказались в пуле..
             this.betPool.remove(item.getId());
             notificationService.sendAuctionIsOver(item);
 

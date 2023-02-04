@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor
+@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 public class Bet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
