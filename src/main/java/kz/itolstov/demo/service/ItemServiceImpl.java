@@ -1,6 +1,5 @@
 package kz.itolstov.demo.service;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import kz.itolstov.demo.exception.AuctionException;
 import kz.itolstov.demo.model.Item;
 import kz.itolstov.demo.repository.ItemRepository;
@@ -9,7 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +23,20 @@ public class ItemServiceImpl implements ItemService {
         return itemRepository.findByStatus(PageRequest.of(page, size), Item.Status.ACTIVE);
     }
 
-//    @Override
-//    public Page<Item> findByUsername(String username, Integer page, Integer size) {
-//        return itemRepository.findByOwnerEmail(PageRequest.of(page, size), username);
-//    }
 
     @Override
     public Page<Item> findByOwnerId(Long id, Integer page, Integer size) {
         return itemRepository.findByOwnerId(PageRequest.of(page, size), id);
+    }
+
+    @Override
+    public Set<Long> getActiveItemIds() {
+        return itemRepository.getActiveItemIds();
+    }
+
+    @Override
+    public List<Item> getItemsNeedToDiscard() {
+        return itemRepository.getItemsNeedToDiscard();
     }
 
     @Override

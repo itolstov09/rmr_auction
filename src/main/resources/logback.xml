@@ -39,15 +39,33 @@
         </triggeringPolicy>
     </appender>
 
+    <appender name="AUCTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <file>${logs_path}/auction.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logs_path}/archived/auction.%i.log</fileNamePattern>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
     <!-- Appender Output Configuration -->
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_MAIN"/>
     </root>
 
-    <logger name="kz.itolstov.demo.service.NotificationService" level="info">
+    <logger name="kz.itolstov.demo.service.NotificationService" level="debug">
         <appender-ref ref="NOTIFICATIONS" />
     </logger>
+
+    <logger name="kz.itolstov.demo.service.AuctionService" level="debug">
+        <appender-ref ref="AUCTION" />
+    </logger>
+
 
 
 </configuration>
