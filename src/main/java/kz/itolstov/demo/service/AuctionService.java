@@ -8,6 +8,7 @@ import kz.itolstov.demo.repository.BetRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,27 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
-@RequiredArgsConstructor
 public class AuctionService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuctionService.class);
-    //todo получение параметра из настроек
-    private static final long AUCTION_DURATION_IN_MINUTES = 1L;
+
+    private final int AUCTION_DURATION_IN_MINUTES;
 
     private final ItemService itemService;
     private final NotificationService notificationService;
     private final BetRepository repository;
+
+    public AuctionService(
+            @Value("${auction.duration-in-minutes}")
+            String AUCTION_DURATION_IN_MINUTES,
+            ItemService itemService,
+            NotificationService notificationService,
+            BetRepository repository
+    ) {
+        this.AUCTION_DURATION_IN_MINUTES = Integer.parseInt(AUCTION_DURATION_IN_MINUTES);
+        this.itemService = itemService;
+        this.notificationService = notificationService;
+        this.repository = repository;
+    }
 
     // todo сделать класс-обертку над структурой данных. Либо заменить весь пул на класс
     private final Map<Long, Map<String, Object>> betPool = new HashMap<>();
