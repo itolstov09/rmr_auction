@@ -53,7 +53,7 @@
     </appender>
 
     <!-- Appender Output Configuration -->
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE_MAIN"/>
     </root>
